@@ -6,7 +6,7 @@ public partial class WelcomePage : ContentPage
 	{
 		InitializeComponent();
 	}
-
+	// Makes the welcome page the main page
     private void BtnGetStarted_Clicked(object sender, EventArgs e)
     {
 		Navigation.PushModalAsync(new MainPage());

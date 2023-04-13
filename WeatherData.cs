@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 namespace WeatherApp1
 {
 
-    public class WeatherData
+    public class WeatherData   //          Specifying that the property is to be populated with the value of the property from the JSON object.
+                               //          Declaring a public property of type string  and providing get and set accessors.
+
     {
         [JsonProperty("name")]
         public string Title { get; set; }
