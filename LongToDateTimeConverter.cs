@@ -9,7 +9,7 @@ namespace WeatherApp1
 {
     public class LongToDateTimeConverter : IValueConverter
     {
-        DateTime _time = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        private DateTime _time = new DateTime(1970, 1, 1, 0, 0, 0, 0);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             long dateTime = (long)value;

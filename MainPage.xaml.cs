@@ -2,7 +2,7 @@
 
 public partial class MainPage : ContentPage
 {
-    RestService _restService;
+    private RestService _restService;
 
     public MainPage()
     {

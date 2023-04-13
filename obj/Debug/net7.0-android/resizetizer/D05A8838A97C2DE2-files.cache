@@ -1,6 +1,7 @@
 ﻿obj\Debug\net7.0-android\resizetizer\r\drawable\cloudiness.png
 obj\Debug\net7.0-android\resizetizer\r\drawable\humidity.png
 obj\Debug\net7.0-android\resizetizer\r\drawable\overlay.png
+obj\Debug\net7.0-android\resizetizer\r\drawable\pngwing.png
 obj\Debug\net7.0-android\resizetizer\r\drawable\pressure.png
 obj\Debug\net7.0-android\resizetizer\r\drawable\weather.png
 obj\Debug\net7.0-android\resizetizer\r\drawable\wind.png

@@ -10,7 +10,7 @@ namespace WeatherApp1
 {
     public class RestService
     {
-        HttpClient _client;
+        private HttpClient _client;
 
         public RestService()
         {
