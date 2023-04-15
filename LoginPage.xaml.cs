@@ -7,10 +7,6 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
 	}
 
-    private void InitializeComponent()
-    {
-        throw new NotImplementedException();
-    }
 
     private void BtnLogin_Clicked(object sender, EventArgs e)
     {
