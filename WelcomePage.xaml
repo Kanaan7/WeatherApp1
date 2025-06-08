@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WeatherApp1.WelcomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Welcome">
+
+    <!-- 1) Full‐screen purple–pink gradient matching the app’s palette -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#7B4397" Offset="0.0" />
+            <GradientStop Color="#DC2430" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <!-- 2) Centered content, scrollable in case of small screens/keyboard -->
+    <ScrollView>
+        <VerticalStackLayout
+      Padding="40"
+      Spacing="24"
+      HorizontalOptions="Center"
+      VerticalOptions="Center">
+
+            <!-- 3) App logo, then title & tagline -->
+            <Image
+        Source="pngwing.png"
+        HeightRequest="150"
+        WidthRequest="150"
+        Aspect="AspectFit"
+        HorizontalOptions="Center" />
+
+            <Label
+        Text="Weather Forecast"
+        FontSize="32"
+        FontAttributes="Bold"
+        TextColor="White"
+        HorizontalOptions="Center" />
+
+            <Label
+        Text="Real-time updates at your fingertips"
+        FontSize="18"
+        TextColor="White"
+        HorizontalOptions="Center" />
+
+            <!-- 4) Get Started button in white with accent border/shadow -->
+            <Frame
+        Padding="0"
+        CornerRadius="25"
+        HasShadow="True"
+        BackgroundColor="White"
+        HorizontalOptions="Center"
+        WidthRequest="200">
+                <Button
+          Text="Get Started"
+          FontSize="18"
+          TextColor="#7B4397"
+          BackgroundColor="Transparent"
+          CornerRadius="25"
+          Clicked="BtnGetStarted_Clicked" />
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

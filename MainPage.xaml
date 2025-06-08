@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WeatherApp1.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WeatherApp1"
+    Title="Weather">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!-- Dynamic background brushes -->
+            <LinearGradientBrush x:Key="SunnyGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FFFB7D" Offset="0.0" />
+                <GradientStop Color="#FFB347" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="RainyGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#2C3E50" Offset="0.0" />
+                <GradientStop Color="#4CA1AF" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="CloudyGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#BDC3C7" Offset="0.0" />
+                <GradientStop Color="#2C3E50" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="SnowyGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#E0EAFC" Offset="0.0" />
+                <GradientStop Color="#CFDEF3" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <!-- Converter for sunrise/sunset -->
+            <local:LongToDateTimeConverter x:Key="longToDatetimeConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- WEATHER PANEL -->
+        <ScrollView
+      x:Name="WeatherPanel"
+      Grid.Row="0"
+      IsVisible="False"
+      VerticalScrollBarVisibility="Always">
+            <VerticalStackLayout Spacing="24">
+
+                <!-- Icon + City/Temp/Desc + Favorite Star -->
+                <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Image x:Name="ConditionImage" WidthRequest="100" HeightRequest="100" />
+
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <HorizontalStackLayout Spacing="4">
+                            <Label FontSize="24">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Title}" />
+                                        <Span Text=", " />
+                                        <Span Text="{Binding Sys.Country}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <ImageButton
+                x:Name="FavoriteButton"
+                Source="star_outline.png"
+                Clicked="OnFavoriteButtonClicked"
+                WidthRequest="28"
+                HeightRequest="28"
+                BackgroundColor="Transparent" />
+                        </HorizontalStackLayout>
+
+                        <Label x:Name="TempLabel" FontSize="36" HorizontalOptions="Center" />
+                        <Label x:Name="DescLabel" FontSize="18" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Four stats -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+                    <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                        <Image Source="humidity.png" WidthRequest="32" HeightRequest="32"/>
+                        <Label Text="{Binding Main.Humidity}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Humidity %" FontSize="12" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                        <Image Source="wind.png" WidthRequest="32" HeightRequest="32"/>
+                        <Label Text="{Binding Wind.Speed}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Wind km/h" FontSize="12" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                        <Image Source="pressure.png" WidthRequest="32" HeightRequest="32"/>
+                        <Label Text="{Binding Main.Pressure}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Pressure hPa" FontSize="12" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                        <Image Source="cloudiness.png" WidthRequest="32" HeightRequest="32"/>
+                        <Label Text="{Binding Clouds.All}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Clouds %" FontSize="12" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Sunrise / Sunset -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+                    <Label Text="Sunrise:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Sys.Sunrise, Converter={StaticResource longToDatetimeConverter}}"/>
+                    <Label Text="Sunset:"  FontAttributes="Bold"/>
+                    <Label Text="{Binding Sys.Sunset, Converter={StaticResource longToDatetimeConverter}}"/>
+                </HorizontalStackLayout>
+
+                <!-- Favorites list -->
+                <Label Text="Favorites" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <CollectionView
+          x:Name="FavoritesView"
+          ItemsLayout="HorizontalList"
+          SelectionMode="Single"
+          SelectionChanged="OnFavoriteSelected"
+          HeightRequest="50">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                CornerRadius="8"
+                Padding="8"
+                Margin="4"
+                BackgroundColor="LightGray"
+                HasShadow="False">
+                                <Label
+                  Text="{Binding}"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center" />
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- CONTROL AREA -->
+        <VerticalStackLayout
+      Grid.Row="1"
+      Spacing="12"
+      HorizontalOptions="Center"
+      VerticalOptions="End">
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                <Label Text="°C" VerticalOptions="Center"/>
+                <Switch x:Name="UnitSwitch" VerticalOptions="Center"/>
+                <Label Text="Turn on for °F" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                <Entry
+          x:Name="_cityEntry"
+          Placeholder="Enter city"
+          WidthRequest="250"
+          Completed="OnGetWeatherClicked" />
+                <Button
+          Text="Go"
+          Clicked="OnGetWeatherClicked" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

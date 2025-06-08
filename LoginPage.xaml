@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="WeatherApp1.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Welcome">
+
+    <!-- 1) Full-screen gradient background like MainPage -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#7B4397" Offset="0.0" />
+            <GradientStop Color="#DC2430" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <!-- 2) ScrollView so inputs aren’t hidden by keyboard -->
+    <ScrollView>
+        <VerticalStackLayout
+      Padding="40"
+      Spacing="24"
+      HorizontalOptions="Center"
+      VerticalOptions="Center">
+
+            <!-- 3) Logo or welcome image -->
+            <Image
+        Source="pngwing.png"
+        HeightRequest="150"
+        WidthRequest="150"
+        Aspect="AspectFit"
+        HorizontalOptions="Center" />
+
+            <!-- 4) Username field in a rounded Frame -->
+            <Frame
+        BackgroundColor="White"
+        CornerRadius="12"
+        HasShadow="True"
+        Padding="0">
+                <Entry
+          x:Name="UsernameEntry"
+          Placeholder="Username"
+          TextColor="#333333"
+          PlaceholderColor="#888888"
+          Margin="12" />
+            </Frame>
+
+            <!-- 5) Password field in a rounded Frame -->
+            <Frame
+        BackgroundColor="White"
+        CornerRadius="12"
+        HasShadow="True"
+        Padding="0">
+                <Entry
+          x:Name="PasswordEntry"
+          Placeholder="Password"
+          IsPassword="True"
+          TextColor="#333333"
+          PlaceholderColor="#888888"
+          Margin="12" />
+            </Frame>
+
+            <!-- 6) Primary Login button -->
+            <Button
+        Text="Login"
+        BackgroundColor="#FFFFFF"
+        TextColor="#7B4397"
+        FontAttributes="Bold"
+        CornerRadius="12"
+        HeightRequest="50"
+        Clicked="BtnLogin_Clicked"
+        HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
